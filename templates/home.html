@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studies Recommendation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            overflow: hidden;
+        }
+
+        .mynav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            transition: background 0.5s ease-in-out;
+        }
+
+        .mynav h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .container {
+            margin-top: 120px;
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .recommend-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+            color: black;
+            transition: transform 0.3s ease-in-out;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .recommend-card:hover {
+            transform: scale(1.03);
+        }
+
+        .btn-primary {
+            font-size: 18px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #007bff, #6610f2);
+            border: none;
+            transition: all 0.4s ease-in-out;
+            position: relative;
+            z-index: 3;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .bg-image {
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            position: fixed;
+            width: 100%;
+            z-index: -1;
+            animation: floatBackground 15s infinite linear;
+            transition: background-image 1s ease-in-out;
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes floatBackground {
+            0% { transform: translateY(-15px); }
+            50% { transform: translateY(15px); }
+            100% { transform: translateY(-15px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-image" id="bgImage">
+        <div class="bg-overlay"></div>
+    </div>
+
+    <div class="mynav">
+        <h1>Education Recommendation System</h1>
+    </div>
+
+    <div class="container">
+        <div class="recommend-card">
+            <h1 class="text-dark">Welcome to Our Best Studies Recommendation System</h1>
+            <p class="text-muted">Select the most suitable studies based on academic performance, interests, and career goals.</p>
+            <a href="/recommend" class="btn btn-primary">Get Recommendations</a>
+        </div>
+    </div>
+
+    <script>
+        const images = [
+            "{{ url_for('static', filename='college_1.jpg') }}",
+            "{{ url_for('static', filename='college_2.jpg') }}",
+            "{{ url_for('static', filename='college_3.jpg') }}"
+        ];
+
+        let currentIndex = 0;
+
+        function changeBackground() {
+            document.getElementById('bgImage').style.backgroundImage = `url('${images[currentIndex]}')`;
+            currentIndex = (currentIndex + 1) % images.length;
+            setTimeout(changeBackground, 5000);
+        }
+
+        changeBackground();
+    </script>
+
+</body>
+</html>

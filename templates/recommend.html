@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studies Recommendation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+        }
+
+        .mynav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            margin-top: 100px;
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+            color: black;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .form-control:focus {
+            box-shadow: 0px 0px 8px rgba(106, 17, 203, 0.5);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #007bff, #6610f2);
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            z-index: 3;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mynav">
+        <h1>Education Recommendation System</h1>
+    </div>
+
+    <div class="container">
+        <div class="form-card">
+            <h2 class="text-center">Fill in the details to get recommendations</h2>
+            <form method="post" action="/pred">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="gender">Gender:</label>
+                            <select class="form-control" id="gender" name="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="part_time_job">Part-Time Job:</label>
+                            <select class="form-control" id="part_time_job" name="part_time_job">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="absence_days">Absence Days:</label>
+                            <input type="number" class="form-control" id="absence_days" name="absence_days">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="weekly_self_study_hours">Weekly Self-Study Hours:</label>
+                            <input type="number" class="form-control" id="weekly_self_study_hours" name="weekly_self_study_hours">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Scores -->
+                <div class="form-group">
+                    <label for="math_score">Math Score:</label>
+                    <input type="number" class="form-control" id="math_score" name="math_score">
+                </div>
+
+                <div class="form-group">
+                    <label for="history_score">History Score:</label>
+                    <input type="number" class="form-control" id="history_score" name="history_score">
+                </div>
+
+                <div class="form-group">
+                    <label for="physics_score">Physics Score:</label>
+                    <input type="number" class="form-control" id="physics_score" name="physics_score">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

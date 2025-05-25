@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Smooth gradient background */
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 80px;
+            max-width: 700px;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+
+        .list-group-item {
+            border-radius: 10px;
+            background: linear-gradient(45deg, #007bff, #6610f2);
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .list-group-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="result-card">
+            <h1>Top Recommended Studies</h1>
+            <ul class="list-group mt-3">
+{#                {% for recommendation in recommendations %}#}
+{#                    <li class="list-group-item">{{ recommendation[0] }} with probability {{ recommendation[1] }}</li>#}
+{#                {% endfor %}#}
+{#            #}
+                    {% if recommendations %}
+                        <ul class="list-group mt-3">
+                            {% for recommendation in recommendations %}
+                                <li class="list-group-item">{{ recommendation[0] }} with
+                                    probability {{ recommendation[1] }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <div class="error-message">
+                            ⚠ No data entered. Please provide the required information.
+                        </div>
+                        <a href="/" class="btn btn-primary mt-4">Try Again</a>
+                    {% endif %}
+
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
