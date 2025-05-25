@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc); /* Smooth gradient background */
+            background: linear-gradient(to right, #6a11cb, #2575fc);
             color: white;
             text-align: center;
         }
@@ -45,6 +45,24 @@
             margin-bottom: 20px;
             font-weight: 600;
         }
+
+        .btn-back {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-back:hover {
+            transform: scale(1.05);
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -77,6 +95,9 @@
                     </ul>
                 {% endif %}
             </ul>
+
+            <!-- Back Button -->
+            <a href="/recommend" class="btn-back">Back</a>
         </div>
     </div>
 
