@@ -135,5 +135,5 @@ def pred():
         print(f"Error processing form: {e}")
         return render_template("error.html", error_message="⚠ An error occurred while processing your request. Please try again.")
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=False, host="0.0.0.0", port=5000)
