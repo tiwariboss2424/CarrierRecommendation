@@ -21,12 +21,12 @@ class_names = [
     'Real Estate Developer'
 ]
 
-
 # Function for generating recommendations
 def Recommendations(gender, part_time_job, absence_days, extracurricular_activities,
                     weekly_self_study_hours, math_score, history_score, physics_score,
                     chemistry_score, biology_score, english_score, geography_score,
                     total_score, average_score):
+
     if scaler is None or model is None:
         return [("Error: Missing Model or Scaler", 0.0)]
 
@@ -55,26 +55,21 @@ def Recommendations(gender, part_time_job, absence_days, extracurricular_activit
 
     # Get top 3 recommended studies
     top_classes_idx = np.argsort(-probabilities[0])[:3]
-    recommendations = [(class_names[idx], round(probabilities[0][idx], 2)) for idx in top_classes_idx]
+    recommendations = [(class_names[idx], round(probabilities[0][idx] , 2)) for idx in top_classes_idx]  # Convert to percentage
 
     return recommendations
-
 
 @app.route('/')
 def home():
     return render_template('home.html')
 
-
 @app.route('/recommend')
 def recommend():
     return render_template('recommend.html')
 
-
-
 @app.route('/pred', methods=['POST'])
 def pred():
     try:
-        # Ensure form data exists and is not empty
         if not request.form or not any(request.form.values()):
             return render_template("error.html", error_message="⚠ No Data Entered. Please fill in the required fields.")
 
@@ -97,7 +92,7 @@ def pred():
 
         except ValueError as e:
             print(f"Error converting input values: {e}")
-            return render_template("error.html", error_message="⚠ Invalid data entered. Please ensure all fields are numeric.")
+            return render_template("error.html", error_message="⚠ Invalid data entered. Ensure all fields are numeric.")
 
         # Generate recommendations
         recommendations = Recommendations(
@@ -107,33 +102,14 @@ def pred():
             total_score, average_score
         )
 
-        # If no valid recommendations, redirect to error page
         if not recommendations or recommendations[0][0] == "Error":
             return render_template("error.html", error_message="⚠ No suitable recommendations found. Try refining your input.")
 
-        return render_template("results.html", recommendations=recommendations)
+        return render_template("results.html", recommendations=recommendations, total_score=total_score)
 
     except Exception as e:
         print(f"Unexpected Error: {e}")
         return render_template("error.html", error_message="⚠ An unexpected error occurred. Please try again.")
-
-        # Generate recommendations
-        recommendations = Recommendations(
-            gender, part_time_job, absence_days, extracurricular_activities,
-            weekly_self_study_hours, math_score, history_score, physics_score,
-            chemistry_score, biology_score, english_score, geography_score,
-            total_score, average_score
-        )
-
-        return render_template('results.html', recommendations=recommendations)
-
-    except Exception as e:
-        print(f"Unexpected Error: {e}")
-        return render_template("error.html", error_message="⚠ An unexpected error occurred. Please try again.")
-
-    except Exception as e:
-        print(f"Error processing form: {e}")
-        return render_template("error.html", error_message="⚠ An error occurred while processing your request. Please try again.")
 
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0", port=5000)

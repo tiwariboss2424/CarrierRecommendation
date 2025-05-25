@@ -53,24 +53,29 @@
         <div class="result-card">
             <h1>Top Recommended Studies</h1>
             <ul class="list-group mt-3">
-{#                {% for recommendation in recommendations %}#}
-{#                    <li class="list-group-item">{{ recommendation[0] }} with probability {{ recommendation[1] }}</li>#}
-{#                {% endfor %}#}
-{#            #}
-                    {% if recommendations %}
-                        <ul class="list-group mt-3">
-                            {% for recommendation in recommendations %}
-                                <li class="list-group-item">{{ recommendation[0] }} with
-                                    probability {{ recommendation[1] }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% else %}
-                        <div class="error-message">
-                            ⚠ No data entered. Please provide the required information.
-                        </div>
-                        <a href="/" class="btn btn-primary mt-4">Try Again</a>
+
+                {% if recommendations %}
+                    <ul class="list-group mt-3">
+                        {% for recommendation in recommendations %}
+                            <li class="list-group-item">
+                                {{ recommendation[0] }} with probability {{ (recommendation[1] * 100)|round(2) }}%
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    {% set performance = "Needs Improvement" %}
+                    {% if total_score >= 90 %}
+                        {% set performance = "Excellent" %}
+                    {% elif total_score >= 75 %}
+                        {% set performance = "Good" %}
+                    {% elif total_score >= 50 %}
+                        {% set performance = "Average" %}
                     {% endif %}
 
+                    <ul class="list-group mt-3">
+                        <li class="list-group-item"><strong>Performance:</strong> {{ performance }}</li>
+                    </ul>
+                {% endif %}
             </ul>
         </div>
     </div>
