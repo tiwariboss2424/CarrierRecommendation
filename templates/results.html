@@ -1,105 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            color: white;
-            text-align: center;
-        }
-
-        .container {
-            margin-top: 80px;
-            max-width: 700px;
-        }
-
-        .result-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
-            color: black;
-        }
-
-        .list-group-item {
-            border-radius: 10px;
-            background: linear-gradient(45deg, #007bff, #6610f2);
-            color: white;
-            font-size: 18px;
-            font-weight: 500;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .list-group-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        h1 {
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .btn-back {
-            margin-top: 20px;
-            font-size: 16px;
-            font-weight: 500;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .btn-back:hover {
-            transform: scale(1.05);
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #b3ffab 0%, #12fff7 100%);
+      font-family: 'Arial', sans-serif;
+      animation: backgroundFade 6s infinite alternate;
+    }
+    @keyframes backgroundFade {
+      from { filter: hue-rotate(0deg); }
+      to { filter: hue-rotate(360deg); }
+    }
+    .container {
+      margin-top: 50px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      animation: slideIn 1s ease-out;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    h1, h3 {
+      text-align: center;
+      color: #333;
+    }
+    .recommendation-list li {
+      font-size: 1.2em;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .performance {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-
-    <div class="container">
-        <div class="result-card">
-            <h1>Top Recommended Studies</h1>
-            <ul class="list-group mt-3">
-
-                {% if recommendations %}
-                    <ul class="list-group mt-3">
-                        {% for recommendation in recommendations %}
-                            <li class="list-group-item">
-                                {{ recommendation[0] }} with probability {{ (recommendation[1] * 100)|round(2) }}%
-                            </li>
-                        {% endfor %}
-                    </ul>
-
-                    {% set performance = "Needs Improvement" %}
-                    {% if total_score >= 90 %}
-                        {% set performance = "Excellent" %}
-                    {% elif total_score >= 75 %}
-                        {% set performance = "Good" %}
-                    {% elif total_score >= 50 %}
-                        {% set performance = "Average" %}
-                    {% endif %}
-
-                    <ul class="list-group mt-3">
-                        <li class="list-group-item"><strong>Performance:</strong> {{ performance }}</li>
-                    </ul>
-                {% endif %}
-            </ul>
-
-            <!-- Back Button -->
-            <a href="/recommend" class="btn-back">Back</a>
-        </div>
-    </div>
-
+<div class="container">
+  <h1>Top Recommended Careers</h1>
+  <ul class="list-group recommendation-list mt-3">
+    {% for recommendation in recommendations %}
+      <li class="list-group-item">
+         {{ recommendation[0] }} with probability {{ recommendation[1] | round(2) }}
+      </li>
+    {% endfor %}
+  </ul>
+  <div class="performance">
+    Performance: {{ performance }}
+  </div>
+  <a href="{{ url_for('recommend') }}" class="btn btn-primary mt-3">Back to Form</a>
+</div>
 </body>
 </html>
